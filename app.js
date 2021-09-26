@@ -41,12 +41,13 @@ app.get("/about", (req, res) => {
 });
 
 //blogs Routes
-app.use("/blog", blogRoutes);
+app.use("/blogs", blogRoutes);
 
 //404 page
 app.use((req, res) => {
+  console.log("BUG");
   res.status(404).render("404", { title: "404" });
 });
 
-app.use(helmet());
-app.use(compression());
+//app.use(helmet());
+//app.use(compression());
