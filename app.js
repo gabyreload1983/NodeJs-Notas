@@ -1,6 +1,8 @@
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const helmet = require("helmet");
+const compression = require("compression");
 
 const blogRoutes = require("./routes/blogRoutes");
 
@@ -36,9 +38,12 @@ app.get("/about", (req, res) => {
 });
 
 //blogs Routes
-app.use("/blogs", blogRoutes);
+app.use("/blog", blogRoutes);
 
 //404 page
 app.use((req, res) => {
   res.status(404).render("404", { title: "404" });
 });
+
+app.use(helmet());
+app.use(compression());
