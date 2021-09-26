@@ -22,20 +22,41 @@ app.set("view engine", "ejs");
 
 //middlereware and static files
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
+// Routes
 app.get("/", (req, res) => {
-  const blogs = [
-    { title: "mario", snippet: "ksdnflkasmgmmfgfg" },
-    { title: "luigi", snippet: "pokpsdf6456465afg" },
-    { title: "princes", snippet: "645665gd1h5f16gj" },
-  ];
-
-  res.render("index", { title: "Home", blogs });
+  res.redirect("/blogs");
 });
 
 app.get("/about", (req, res) => {
   res.render("about", { title: "about" });
+});
+
+//blog Routes
+app.get("/blogs", (req, res) => {
+  Blog.find()
+    .sort({ createdAt: -1 })
+    .then((result) => {
+      res.render("index", { title: "All Blogs", blogs: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+app.post("/blogs", (req, res) => {
+  const blog = new Blog(req.body);
+
+  blog
+    .save()
+    .then((result) => {
+      res.redirect("/blogs");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 app.get("/blogs/create", (req, res) => {
