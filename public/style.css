@@ -1,10 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap");
 body {
-  max-width: 1200px;
+  max-width: 500px;
   margin: 20px auto;
   padding: 0 20px;
   font-family: "Noto Serif", serif;
   max-width: 1200px;
+}
+@media screen and (min-width: 1024px) {
+  body {
+    width: 1200px;
+  }
 }
 p,
 h1,
