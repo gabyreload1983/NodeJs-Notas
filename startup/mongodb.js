@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
+const config = require("config");
 
-const dbURI =
-  "mongodb+srv://reload:Jano1987@cluster0.4hbz9.mongodb.net/blog-reload?retryWrites=true&w=majority";
+const credentials = config.get("credentials");
+
+const dbURI = `mongodb+srv://${credentials}@cluster0.4hbz9.mongodb.net/blog-reload?retryWrites=true&w=majority`;
 
 module.exports = (app) => {
   mongoose
